@@ -1,0 +1,13 @@
+{
+  "name": "meal-sys-srv",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node start"
+  },
+  "dependencies": {
+    "debug": "^2.2.0",
+    "nodejs-websocket": "^1.5.0",
+    "underscore": "^1.8.3"
+  }
+}
