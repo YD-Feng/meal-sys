@@ -60,7 +60,7 @@ module.exports = {
                 test: /\.less/, 
                 loader: extractTextPlugin.extract('style-loader', 'css-loader!less-loader')
             },
-            //.js 文件使用 jsx-loader 来编译处理 jsx-loader 可以添加 ?harmony 参数使其支持 ES6 语法
+            //.js 文件使用 babel-loader 来编译处理
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
