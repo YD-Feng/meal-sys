@@ -12,32 +12,254 @@ var debug = require('debug')('test:server'),//引入 debug 模块，打印调试
     bookList = [],
     shopList = [{
         id: 1,
-        name: '真功夫',
-        bigImgUrl: 'img/demo/shop01.jpg',
-        des: '原盅蒸饭，营养还是蒸的好~'
-    },{
-        id: 2,
         name: '梁华瓦罉饭',
         bigImgUrl: 'img/demo/shop02.jpg',
-        des: '实惠 | 便捷 | 健康 | 美味'
+        des: '为了您的不影响用餐时间，请提前40分钟订餐'
     }],
     menuList = {
         1: [{
             id: 1,
-            name: '香汁排骨饭',
-            price: 18
-        },{
-            id: 2,
-            name: '鱼香茄子饭',
-            price: 16
-        }],
-        2: [{
-            id: 1,
-            name: '梅菜肉饼饭',
+            name: '肉片饭',
             price: 12
         },{
             id: 2,
+            name: '梅菜肉饼饭',
+            price: 12
+        },{
+            id: 3,
             name: '榨菜肉丝饭',
+            price: 12
+        },{
+            id: 4,
+            name: '咸鱼茄子饭',
+            price: 12
+        },{
+            id: 5,
+            name: '榄角腊鸭饭',
+            price: 12
+        },{
+            id: 6,
+            name: '豉汁鱼腩饭',
+            price: 12
+        },{
+            id: 7,
+            name: '榨菜肉丝饭',
+            price: 12
+        },{
+            id: 8,
+            name: '咸鱼花肉饭',
+            price: 13
+        },{
+            id: 9,
+            name: '咸鱼肉片饭',
+            price: 13
+        },{
+            id:10,
+            name: '腊肉饭',
+            price: 12
+        },{
+            id: 11,
+            name: '腊肠饭',
+            price: 15
+        },{
+            id: 12,
+            name: '腊肠饭',
+            price: 15
+        },{
+            id: 13,
+            name: '田鸡饭',
+            price: 15
+        },{
+            id: 14,
+            name: '鸡肾饭',
+            price: 15
+        },{
+            id: 15,
+            name: '银鱼仔饭',
+            price: 15
+        },{
+            id: 16,
+            name: '豉汁排骨饭',
+            price: 15
+        },{
+            id: 17,
+            name: '香菇滑鸡饭',
+            price: 15
+        },{
+            id: 18,
+            name: '梅菜扣肉饭',
+            price: 15
+        },{
+            id: 19,
+            name: '腊味拼肉饭',
+            price: 15
+        },{
+            id: 20,
+            name: '排骨拼肉饭',
+            price: 15
+        },{
+            id: 21,
+            name: '肉丝拼排骨饭',
+            price: 15
+        },{
+            id: 22,
+            name: '腊味拼肉片饭',
+            price: 15
+        },{
+            id: 23,
+            name: '咸鱼拼排骨饭',
+            price: 15
+        },{
+            id: 24,
+            name: '鱼腩拼排骨饭',
+            price: 15
+        },{
+            id: 25,
+            name: '排骨拼腊鸭饭',
+            price: 15
+        },{
+            id: 26,
+            name: '腊味拼腊鸭饭',
+            price: 15
+        },{
+            id: 27,
+            name: '排骨拼腊味饭',
+            price: 16
+        },{
+            id: 28,
+            name: '双拼腊味饭',
+            price: 16
+        },{
+            id: 29,
+            name: '银鱼拼腊味饭',
+            price: 16
+        },{
+            id: 30,
+            name: '咸鱼拼腊味饭',
+            price: 16
+        },{
+            id: 31,
+            name: '滑鸡拼排骨饭',
+            price: 16
+        },{
+            id: 32,
+            name: '滑鸡拼腊味饭',
+            price: 16
+        },{
+            id: 33,
+            name: '银鱼拼排骨饭',
+            price: 16
+        },{
+            id: 34,
+            name: '鸡翅饭',
+            price: 16
+        },{
+            id: 35,
+            name: '牛肉饭',
+            price: 16
+        },{
+            id: 36,
+            name: '窝蛋牛肉饭',
+            price: 17
+        },{
+            id: 37,
+            name: '牛肉拼排骨饭',
+            price: 18
+        },{
+            id: 38,
+            name: '牛肉拼腊味饭',
+            price: 18
+        },{
+            id: 39,
+            name: '牛肉拼腊肉饭',
+            price: 18
+        },{
+            id: 40,
+            name: '牛肉拼腊肠饭',
+            price: 18
+        },{
+            id: 41,
+            name: '银鱼滑鸡饭',
+            price: 18
+        },{
+            id: 42,
+            name: '黄鳝饭',
+            price: 20
+        },{
+            id: 43,
+            name: '烧肉饭',
+            price: 13
+        },{
+            id: 44,
+            name: '烧鸭饭',
+            price: 13
+        },{
+            id: 45,
+            name: '白切鸡饭',
+            price: 13
+        },{
+            id: 46,
+            name: '手撕鸡饭',
+            price: 13
+        },{
+            id: 47,
+            name: '猪肚饭',
+            price: 13
+        },{
+            id: 48,
+            name: '叉烧拼烧肉饭',
+            price: 14
+        },{
+            id: 49,
+            name: '烧鸭腿饭',
+            price: 14
+        },{
+            id: 50,
+            name: '白切鸡拼烧鸭饭',
+            price: 14
+        },{
+            id: 51,
+            name: '烧鸭拼手撕鸡饭',
+            price: 14
+        },{
+            id: 52,
+            name: '叉烧饭',
+            price: 15
+        },{
+            id: 53,
+            name: '烧鸭拼猪肚饭',
+            price: 15
+        },{
+            id: 54,
+            name: '叉烧拼肾球饭',
+            price: 15
+        },{
+            id: 55,
+            name: '肾球拼烧肉饭',
+            price: 15
+        },{
+            id: 56,
+            name: '肾球拼猪肚饭',
+            price: 15
+        },{
+            id: 57,
+            name: '烧鸭拼肾球饭',
+            price: 15
+        },{
+            id: 58,
+            name: '茶树菇炖老鸡',
+            price: 10
+        },{
+            id: 59,
+            name: '花生眉豆炖鸡脚',
+            price: 10
+        },{
+            id: 60,
+            name: '虫草花炖瘦肉',
+            price: 12
+        },{
+            id: 61,
+            name: '花旗参炖竹丝鸡',
             price: 12
         }]
     },

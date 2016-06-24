@@ -39,7 +39,8 @@ module.exports = {
     //入口文件输出配置
     output: {
         path: path.resolve(__dirname, './dist'),
-        filename: 'js/[name].js'
+        filename: 'js/[name].js',
+        chunkFilename: 'js/modules/[name].js?v=[hash:8]'
     },
     
     module: {

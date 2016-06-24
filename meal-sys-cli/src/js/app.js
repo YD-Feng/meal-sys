@@ -78,7 +78,7 @@ ws.onmessage = function (e) {
 
 //url切换（路由变更）全局监听
 window.addEventListener('hashchange', function(event) {
-    console.info(event.newURL);
+    //console.info(event.newURL);
 }, false);
 
 React.render((
