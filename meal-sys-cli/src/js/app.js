@@ -14,7 +14,7 @@ import MenuAction from './action/staple/menu';
 import CheckedListAction from './action/staple/checkedList';
 import DetailAction from './action/staple/detail';
 
-let host = '127.0.0.1',
+let host = '10.7.204.187',
     port = 9527,
     url = 'ws://'+host+':'+port+'/';
 window.ws = new WebSocket(url);

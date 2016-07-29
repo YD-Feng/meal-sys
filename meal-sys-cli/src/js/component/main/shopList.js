@@ -7,6 +7,7 @@ import ShopStore from '../../store/main/shop';
 import ShopAction from '../../action/main/shop';
 import BookAction from '../../action/main/book';
 import AppLoadingAction from '../../action/appLoading';
+import AppLocationAction from '../../action/appLocation';
 
 import Loading from '../../component/common/loading';
 import Tips from '../../component/common/tips';
@@ -21,8 +22,7 @@ let ShopList = React.createClass({
     },
     
     componentWillMount() {
-        let _this = this;
-        
+        AppLocationAction.setPath(this.props.location.pathname);
         AppLoadingAction.show();
             
         ShopAction.getData(function () {

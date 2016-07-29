@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import BookStore from '../../store/main/book';
 import BookAction from '../../action/main/book';
 import AppLoadingAction from '../../action/appLoading';
+import AppLocationAction from '../../action/appLocation';
 
 import Loading from '../../component/common/loading';
 
@@ -19,6 +20,7 @@ let BookList = React.createClass({
     },
     
     componentWillMount() {
+        AppLocationAction.setPath(this.props.location.pathname);
         AppLoadingAction.show();
             
         BookAction.getData(function () {

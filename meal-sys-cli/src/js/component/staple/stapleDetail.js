@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import DetailStore from '../../store/staple/detail';
 import DetailAction from '../../action/staple/detail';
 import AppLoadingAction from '../../action/appLoading';
+import AppLocationAction from '../../action/appLocation';
 
 import Loading from '../../component/common/loading';
 import Tips from '../../component/common/tips';
@@ -21,7 +22,8 @@ let StapleDetail = React.createClass({
     
     componentWillMount() {
         let _this = this;
-        
+
+        AppLocationAction.setPath(_this.props.location.pathname);
         AppLoadingAction.show();
             
         DetailAction.getData(_this.props.location.query.id, function () {

@@ -1,15 +1,26 @@
 'use strict';
 
 import React from 'react';
+import Reflux from 'reflux';
 import { Link } from 'react-router';
 import GoBack from './common/goBack';
 import Logout from './common/logout';
 
+import AppLocationStore from './../store/appLocation';
+
 let Staple = React.createClass({
-    contextTypes: {
-        route: React.PropTypes.object,
-        router: React.PropTypes.object.isRequired
+    mixins: [Reflux.connect(AppLocationStore, 'currentPath')],
+
+    getInitialState() {
+        return {
+            currentPath: null
+        };
     },
+
+    // contextTypes: {
+    //     route: React.PropTypes.object,
+    //     router: React.PropTypes.object.isRequired
+    // },
     
     render() {
         return ( 
@@ -22,7 +33,7 @@ let Staple = React.createClass({
                 
                 <footer className="footer">
                     <div className="inner">
-                        <Link className="btn" to={{
+                        <Link className={this.state.currentPath != '/staple/stapleDetail' ? 'btn active': 'btn'} to={{
                             pathname: '/staple/menuList',
                             query : {
                                 id : this.props.location.query.id
@@ -30,7 +41,7 @@ let Staple = React.createClass({
                         }}>
                             <i className="iconfont icon-wucan1"></i>&nbsp;菜单列表
                         </Link>
-                        <Link className="btn" to={{
+                        <Link className={this.state.currentPath == '/staple/stapleDetail' ? 'btn active': 'btn'} to={{
                             pathname: '/staple/stapleDetail',
                             query : {
                                 id : this.props.location.query.id

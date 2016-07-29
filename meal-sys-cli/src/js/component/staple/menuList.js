@@ -10,6 +10,7 @@ import MenuAction from '../../action/staple/menu';
 import CheckedListStore from '../../store/staple/checkedList';
 import CheckedListAction from '../../action/staple/checkedList';
 import AppLoadingAction from '../../action/appLoading';
+import AppLocationAction from '../../action/appLocation';
 
 import Loading from '../../component/common/loading';
 import Tips from '../../component/common/tips';
@@ -45,6 +46,7 @@ let MenuList = React.createClass({
                 return deferred.promise;
             };
             
+        AppLocationAction.setPath(_this.props.location.pathname);
         AppLoadingAction.show();
         
         q.allSettled([getMenuData(), getCheckListData()]).done(function (result) {
@@ -74,7 +76,7 @@ let MenuList = React.createClass({
             shopId: _this.props.location.query.id,
             foodId: id
         }, function () {
-            AppLoadingAction.show();
+            AppLoadingAction.hide();
         });
     },
     
