@@ -26,8 +26,8 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin()
     ],
-    
-    //页面入口文件配置
+
+    //JS文件引用入口配置
     entry: {
         common: ['react', 'history', 'react-router', 'reflux'],
         app: [
@@ -35,14 +35,14 @@ module.exports = {
             path.resolve(__dirname, './src/js/app.js')
         ]
     },
-    
+
     //入口文件输出配置
     output: {
-        path: path.resolve(__dirname, './dist'),
+        path: path.resolve(__dirname, './dist'), //指定生成文件的保存路径
         filename: 'js/[name].js',
         chunkFilename: 'js/modules/[name].js?v=[hash:8]'
     },
-    
+
     module: {
         //指定没有依赖的模块，webpack将不再扫描这个文件中的依赖
         noParse: [
@@ -51,8 +51,8 @@ module.exports = {
         //加载器配置
         loaders: [
             //less 文件先通过 less-load 处理成 css，然后再通过 css-loader 加载成 css 模块，最后由 style-loader 加载器对其做最后的处理，从而运行时可以通过 style 标签将其应用到最终的浏览器环境
-            { 
-                test: /\.less/, 
+            {
+                test: /\.less/,
                 loader: 'style-loader!css-loader!less-loader'
             },
             //.js 文件使用 babel-loader 来编译处理
@@ -65,18 +65,18 @@ module.exports = {
                 } //备注：es2015 用于支持 ES6 语法，react 用于解决 render() 报错的问题
             },
             //图片文件使用 file-loader 来处理
-            { 
-                test: /\.(png|jpg|gif)\??.*$/, 
+            {
+                test: /\.(png|jpg|gif)\??.*$/,
                 loader: 'file-loader?name=./img/[name].[ext]?[hash]'
             },
             //字体文件使用 file-loader 来处理
-            { 
-                test: /\.(eot|svg|ttf|woff)\??.*$/, 
+            {
+                test: /\.(eot|svg|ttf|woff)\??.*$/,
                 loader: 'file-loader?name=./font/[name].[ext]?[hash]'
             }
         ]
     },
-    
+
     //其它解决方案配置
     resolve: {
         //查找 module 的话从这里开始查找
@@ -89,11 +89,11 @@ module.exports = {
             'history': path.resolve(__dirname, 'node_modules/history/umd/history.min.js'),
             'react-router': path.resolve(__dirname, 'node_modules/react-router/umd/ReactRouter.min.js'),
             'reflux': path.resolve(__dirname, 'node_modules/reflux/dist/reflux.min.js'),
-            'underscore': path.resolve(__dirname, 'node_modules/underscore/underscore.js'),
+            'underscore': path.resolve(__dirname, 'node_modules/underscore/underscore-min.js'),
             'q': path.resolve(__dirname, 'node_modules/q/q.js')
         }
     },
-    
+
     devServer: {
         inline: true,
         port: 3000

@@ -108,7 +108,7 @@ webSvr.on('error', function(error) {
 //开始侦听2000端口
 webSvr.listen(2000, function(){
     //向控制台输出服务启动的信息
-    console.log('[WebSvr][Start] running at http://127.0.0.1:3000/');
+    console.log('[WebSvr][Start] running at http://127.0.0.1:2000/');
     //结束服务启动计时器并输出
     console.timeEnd('[WebSvr][Start]');
 });

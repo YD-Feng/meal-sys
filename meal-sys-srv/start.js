@@ -348,7 +348,7 @@ function login (data, conn) {
                 data: '名字不能为空'
             }));
         }
-    }, 300);
+    }, 1000);
 }
 
 function logout (conn) {
