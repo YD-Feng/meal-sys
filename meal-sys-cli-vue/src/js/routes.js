@@ -2,7 +2,7 @@ module.exports = [
     {
         path: '/',
         name: 'login',
-        component: function (resolve, reject) {
+        component: function (resolve) {
             require.ensure(['./../views/login.vue'], function (require) {
                 resolve(require('./../views/login.vue'));
             });
