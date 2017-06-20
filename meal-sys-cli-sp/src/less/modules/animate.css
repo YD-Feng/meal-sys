@@ -1,0 +1,17 @@
+@keyframes loading {
+    from {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(0, 2px);
+    }
+    50% {
+        transform: translate(0, 0);
+    }
+    75% {
+        transform: translate(0, -2px);
+    }
+    to {
+        transform: translate(0, 0);
+    }
+}

@@ -3,8 +3,6 @@
 import './../less/common.less'; //加载初始化样式
 
 import React from 'react';
-import Reflux from 'reflux';
-import _ from 'underscore';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 import AppTipsAction from './action/appTips';
@@ -14,7 +12,7 @@ import MenuAction from './action/staple/menu';
 import CheckedListAction from './action/staple/checkedList';
 import DetailAction from './action/staple/detail';
 
-let host = '127.0.0.1',
+let host = '10.7.204.187',
     port = 9527,
     url = 'ws://'+host+':'+port+'/';
 window.ws = new WebSocket(url);
