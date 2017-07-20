@@ -11,7 +11,7 @@ var path = require('path'),
 module.exports = {
     //JS文件引用入口配置
     entry: {
-        common: ['jquery', 'underscore', 'vue', 'vue-router'],
+        common: ['underscore', 'vue', 'vue-router'],
         app: [
             'webpack/hot/dev-server',
             path.resolve(__dirname, './src/js/app.js')

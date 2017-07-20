@@ -1,5 +1,5 @@
 module.exports = function () {
-    var host = '10.7.204.128',
+    var host = '127.0.0.1',
         port = 9527,
         url = 'ws://' + host + ':' + port + '/';
 

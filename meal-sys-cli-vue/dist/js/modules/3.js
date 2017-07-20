@@ -1,9 +1,10 @@
 webpackJsonp([3],{
 
 /***/ 16:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	var Vue // late bind
+	var version
 	var map = window.__VUE_HOT_MAP__ = Object.create(null)
 	var installed = false
 	var isBrowserify = false
@@ -13,7 +14,8 @@ webpackJsonp([3],{
 	  if (installed) return
 	  installed = true
 
-	  Vue = vue
+	  Vue = vue.__esModule ? vue.default : vue
+	  version = Vue.version.split('.').map(Number)
 	  isBrowserify = browserify
 
 	  // compat with < 2.0.0-alpha.7
@@ -21,7 +23,7 @@ webpackJsonp([3],{
 	    initHookName = 'init'
 	  }
 
-	  exports.compatible = Number(Vue.version.split('.')[0]) >= 2
+	  exports.compatible = version[0] >= 2
 	  if (!exports.compatible) {
 	    console.warn(
 	      '[HMR] You are using a version of vue-hot-reload-api that is ' +
@@ -96,32 +98,50 @@ webpackJsonp([3],{
 	  }
 	}
 
-	exports.rerender = tryWrap(function (id, fns) {
+	exports.rerender = tryWrap(function (id, options) {
 	  var record = map[id]
-	  record.Ctor.options.render = fns.render
-	  record.Ctor.options.staticRenderFns = fns.staticRenderFns
+	  if (!options) {
+	    record.instances.slice().forEach(function (instance) {
+	      instance.$forceUpdate()
+	    })
+	    return
+	  }
+	  if (typeof options === 'function') {
+	    options = options.options
+	  }
+	  record.Ctor.options.render = options.render
+	  record.Ctor.options.staticRenderFns = options.staticRenderFns
 	  record.instances.slice().forEach(function (instance) {
-	    instance.$options.render = fns.render
-	    instance.$options.staticRenderFns = fns.staticRenderFns
+	    instance.$options.render = options.render
+	    instance.$options.staticRenderFns = options.staticRenderFns
 	    instance._staticTrees = [] // reset static trees
 	    instance.$forceUpdate()
 	  })
 	})
 
 	exports.reload = tryWrap(function (id, options) {
-	  makeOptionsHot(id, options)
 	  var record = map[id]
-	  record.Ctor.extendOptions = options
-	  var newCtor = Vue.extend(options)
-	  record.Ctor.options = newCtor.options
-	  record.Ctor.cid = newCtor.cid
-	  if (newCtor.release) {
-	    // temporary global mixin strategy used in < 2.0.0-alpha.6
-	    newCtor.release()
+	  if (options) {
+	    if (typeof options === 'function') {
+	      options = options.options
+	    }
+	    makeOptionsHot(id, options)
+	    if (version[1] < 2) {
+	      // preserve pre 2.2 behavior for global mixin handling
+	      record.Ctor.extendOptions = options
+	    }
+	    var newCtor = record.Ctor.super.extend(options)
+	    record.Ctor.options = newCtor.options
+	    record.Ctor.cid = newCtor.cid
+	    record.Ctor.prototype = newCtor.prototype
+	    if (newCtor.release) {
+	      // temporary global mixin strategy used in < 2.0.0-alpha.6
+	      newCtor.release()
+	    }
 	  }
 	  record.instances.slice().forEach(function (instance) {
-	    if (instance.$parent) {
-	      instance.$parent.$forceUpdate()
+	    if (instance.$vnode && instance.$vnode.context) {
+	      instance.$vnode.context.$forceUpdate()
 	    } else {
 	      console.warn('Root or manually mounted instance modified. Full reload required.')
 	    }
@@ -129,12 +149,13 @@ webpackJsonp([3],{
 	})
 
 
-/***/ },
+/***/ }),
 
 /***/ 27:
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
 
 	/* script */
 	__vue_exports__ = __webpack_require__(28)
@@ -152,8 +173,7 @@ webpackJsonp([3],{
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.name = __vue_options__.name || "bookList"
-	__vue_options__.__file = "e:\\czf-work\\myProject\\meal-sys\\meal-sys-cli-vue\\src\\views\\main\\bookList.vue"
+	__vue_options__.__file = "F:\\code\\@meal-sys\\meal-sys-cli-vue\\src\\views\\main\\bookList.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 
@@ -164,9 +184,9 @@ webpackJsonp([3],{
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-564f067d", __vue_options__)
+	    hotAPI.createRecord("data-v-1f9c78e5", __vue_options__)
 	  } else {
-	    hotAPI.reload("data-v-564f067d", __vue_options__)
+	    hotAPI.reload("data-v-1f9c78e5", __vue_options__)
 	  }
 	})()}
 	if (__vue_options__.functional) {console.error("[vue-loader] bookList.vue: functional components are not supported and should be defined in plain js files using render functions.")}
@@ -174,10 +194,10 @@ webpackJsonp([3],{
 	module.exports = __vue_exports__
 
 
-/***/ },
+/***/ }),
 
 /***/ 28:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	//
 	//
@@ -233,66 +253,58 @@ webpackJsonp([3],{
 	    }
 	};
 
-/***/ },
+/***/ }),
 
 /***/ 29:
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	module.exports={render:function (){with(this) {
-	  return _h('div', {
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
 	    staticClass: "wrap-page"
-	  }, [_m(0), " ", (list && list.length == 0) ? _h('div', {
+	  }, [_c('h2', {
+	    staticClass: "mod-title green"
+	  }, [_vm._v("我要点餐")]), _vm._v(" "), (_vm.list && _vm.list.length == 0) ? _c('div', {
 	    staticClass: "cm-no-data"
-	  }, [_m(1), " ", _m(2)]) : _e(), " ", (list) ? _h('ul', {
+	  }, [_c('i', {
+	    staticClass: "face"
+	  }), _vm._v(" "), _c('p', {
+	    staticClass: "text"
+	  }, [_vm._v("还没有发起任何点餐")])]) : _vm._e(), _vm._v(" "), (_vm.list) ? _c('ul', {
 	    staticClass: "shop-list"
-	  }, [_l((list), function(item) {
-	    return _h('li', {
+	  }, _vm._l((_vm.list), function(item) {
+	    return _c('li', {
 	      staticClass: "item"
-	    }, [_h('div', {
+	    }, [_c('div', {
 	      staticClass: "img-wrap"
-	    }, [_h('img', {
+	    }, [_c('img', {
 	      attrs: {
 	        "src": item.bigImgUrl
 	      }
-	    })]), " ", _h('div', {
+	    })]), _vm._v(" "), _c('div', {
 	      staticClass: "cont-wrap"
-	    }, [_h('p', {
+	    }, [_c('p', {
 	      staticClass: "title"
-	    }, [_s(item.name)]), " ", _h('p', {
+	    }, [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('p', {
 	      staticClass: "des"
-	    }, ["点餐发起人：", _h('em', {
+	    }, [_vm._v("点餐发起人："), _c('em', {
 	      staticClass: "cm-text-red"
-	    }, [_s(item.launcher)])]), " ", _h('button', {
+	    }, [_vm._v(_vm._s(item.launcher))])]), _vm._v(" "), _c('button', {
 	      staticClass: "btn",
 	      on: {
 	        "click": function($event) {
-	          goTo(item.id)
+	          _vm.goTo(item.id)
 	        }
 	      }
-	    }, ["我 要", _m(3), "点 餐"])])])
-	  })]) : _e()])
-	}},staticRenderFns: [function (){with(this) {
-	  return _h('h2', {
-	    staticClass: "mod-title green"
-	  }, ["我要点餐"])
-	}},function (){with(this) {
-	  return _h('i', {
-	    staticClass: "face"
-	  })
-	}},function (){with(this) {
-	  return _h('p', {
-	    staticClass: "text"
-	  }, ["还没有发起任何点餐"])
-	}},function (){with(this) {
-	  return _h('br')
-	}}]}
+	    }, [_vm._v("我 要"), _c('br'), _vm._v("点 餐")])])])
+	  })) : _vm._e()])
+	},staticRenderFns: []}
 	if (true) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     __webpack_require__(16).rerender("data-v-564f067d", module.exports)
+	     __webpack_require__(16).rerender("data-v-1f9c78e5", module.exports)
 	  }
 	}
 
-/***/ }
+/***/ })
 
 });
